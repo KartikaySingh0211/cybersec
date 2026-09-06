@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "_id": "66d000000000000000000001",
+      "name": "Alice",
+      "email": "alice@teamvault.demo",
+      "password": "Password123!",
+      "role": "USER",
+      "isAdmin": false
+    },
+    {
+      "_id": "66d000000000000000000002",
+      "name": "Bob",
+      "email": "bob@teamvault.demo",
+      "password": "Password123!",
+      "role": "USER",
+      "isAdmin": false
+    },
+    {
+      "_id": "66d000000000000000000003",
+      "name": "Admin",
+      "email": "admin@teamvault.demo",
+      "password": "AdminPassword123!",
+      "role": "ADMIN",
+      "isAdmin": true
+    }
+  ],
+  "documents": [
+    {
+      "_id": "66d100000000000000000001",
+      "title": "Alice Project Plan",
+      "content": "CONFIDENTIAL: Alice's upcoming Q4 engineering milestones, client roadmaps, and delivery schedules.",
+      "ownerId": "66d000000000000000000001"
+    },
+    {
+      "_id": "66d100000000000000000002",
+      "title": "Alice Personal Notes",
+      "content": "Personal workspace notes: Performance evaluation topics and draft feature ideas for TeamVault.",
+      "ownerId": "66d000000000000000000001"
+    },
+    {
+      "_id": "66d200000000000000000001",
+      "title": "Bob Financial Summary",
+      "content": "HIGHLY CONFIDENTIAL: Bob's Q3 budget breakdown, employee bonus allocations, and financial forecast.",
+      "ownerId": "66d000000000000000000002"
+    },
+    {
+      "_id": "66d200000000000000000002",
+      "title": "Bob Architecture Strategy",
+      "content": "INTERNAL ONLY: Infrastructure blueprints, production database topology, and failover design.",
+      "ownerId": "66d000000000000000000002"
+    }
+  ]
+}
