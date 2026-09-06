@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getAdminUsers, getUser, UserSession } from '../../../lib/api';
-import { ArrowLeft, Copy, Check } from 'lucide-react';
+import { Users, ArrowLeft, ShieldAlert, Copy, Check, Lock, ShieldCheck } from 'lucide-react';
 
 export default function AdminUsersPage() {
   const router = useRouter();
@@ -43,6 +43,8 @@ export default function AdminUsersPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const isBflaActive = currentUser && currentUser.role !== 'ADMIN';
+
   return (
     <div className="space-y-6">
       <div className="flex items-center space-x-3">
@@ -57,6 +59,15 @@ export default function AdminUsersPage() {
           <p className="text-xs text-slate-400">View and audit all registered platform accounts</p>
         </div>
       </div>
+
+      {isBflaActive && (
+        <div className="p-4 rounded-xl bg-red-950/40 border border-red-800/60 text-red-200 text-xs flex items-center space-x-2">
+          <ShieldAlert className="w-4 h-4 text-red-400 flex-shrink-0" />
+          <span>
+            BFLA Active: You are viewing confidential user records as standard user <strong className="text-white">{currentUser?.name}</strong>.
+          </span>
+        </div>
+      )}
 
       {loading ? (
         <div className="p-12 text-center text-slate-500 text-sm">Loading users list...</div>

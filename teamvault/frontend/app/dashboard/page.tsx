@@ -5,10 +5,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getUser, getMyDocuments, UserSession } from '../../lib/api';
 import {
+  User,
+  Shield,
   FileText,
+  AlertTriangle,
   ArrowRight,
   ExternalLink,
-  Lock
+  Lock,
+  Terminal,
+  Plus
 } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -74,6 +79,14 @@ export default function DashboardPage() {
             <span>My Documents</span>
           </Link>
 
+          <Link
+            href="/security-demo"
+            className="px-3.5 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-semibold transition flex items-center space-x-1.5"
+          >
+            <Terminal className="w-3.5 h-3.5" />
+            <span>Security Demo Lab</span>
+          </Link>
+
           {user.role === 'ADMIN' && (
             <Link
               href="/admin"
@@ -83,6 +96,32 @@ export default function DashboardPage() {
               <span>Admin Dashboard</span>
             </Link>
           )}
+        </div>
+      </div>
+
+      {/* Vulnerability Demo Callouts for Current User */}
+      <div className="bg-gradient-to-r from-red-950/30 to-amber-950/20 border border-red-900/30 rounded-xl p-5 space-y-3">
+        <div className="flex items-center space-x-2 text-amber-400 text-sm font-semibold">
+          <AlertTriangle className="w-4 h-4" />
+          <span>Vulnerability Testing Shortcuts For This Session</span>
+        </div>
+        <p className="text-xs text-slate-300 leading-relaxed">
+          You are currently signed in as <strong className="text-white">{user.name}</strong> ({user.role}). You can test all 4 vulnerabilities right now:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+          <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs space-y-1">
+            <span className="font-bold text-red-400">1. Test BOLA (API1):</span>
+            <p className="text-slate-400">
+              Open one of your documents below, then change the ID in the browser URL to Bob&apos;s ID (<code className="text-amber-300">66d200000000000000000001</code>).
+            </p>
+          </div>
+
+          <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-xs space-y-1">
+            <span className="font-bold text-blue-400">2. Test BFLA (API5):</span>
+            <p className="text-slate-400">
+              Even if you are a normal USER, manually type <Link href="/admin" className="text-blue-400 underline hover:text-blue-300">/admin</Link> in the browser bar to access protected admin metrics!
+            </p>
+          </div>
         </div>
       </div>
 

@@ -6,11 +6,14 @@ import { useRouter } from 'next/navigation';
 import { getAdminStatistics, getAdminUsers, getUser, UserSession } from '../../lib/api';
 import {
   Lock,
+  ShieldAlert,
   Users,
   FileText,
   Activity,
   Server,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck,
+  Clock
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -48,6 +51,8 @@ export default function AdminDashboardPage() {
     loadAdminData();
   }, [router]);
 
+  const isBflaExploited = currentUser && currentUser.role !== 'ADMIN';
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -70,6 +75,33 @@ export default function AdminDashboardPage() {
           <span>Manage Users</span>
         </Link>
       </div>
+
+      {/* BFLA Live Exploitation Banner */}
+      {isBflaExploited && (
+        <div className="p-5 rounded-xl bg-red-950/40 border-2 border-red-500 text-red-200 space-y-2 animate-in fade-in duration-300">
+          <div className="flex items-center space-x-2 text-red-400 font-bold text-sm">
+            <ShieldAlert className="w-5 h-5 text-red-400 animate-bounce" />
+            <span>🚨 VULNERABILITY CONFIRMED: OWASP API5 - BFLA ACTIVE!</span>
+          </div>
+          <p className="text-xs leading-relaxed text-red-200">
+            You navigated directly to <code className="font-mono text-white bg-slate-900 px-1 py-0.5 rounded">/admin</code> as{' '}
+            <strong className="text-white underline">{currentUser?.name}</strong> whose account role is{' '}
+            <strong className="text-amber-300 uppercase underline">{currentUser?.role}</strong> (not ADMIN).
+          </p>
+          <p className="text-[11px] text-red-300/80">
+            The backend endpoints <code className="text-red-200">GET /api/admin/users</code> and{' '}
+            <code className="text-red-200">GET /api/admin/statistics</code> authenticated your JWT but failed to check if{' '}
+            <code className="text-red-200">req.user.role === &apos;ADMIN&apos;</code>, exposing administrative telemetry and all registered users!
+          </p>
+        </div>
+      )}
+
+      {!isBflaExploited && currentUser && (
+        <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-800/40 text-emerald-300 text-xs flex items-center space-x-2">
+          <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+          <span>Legitimate Access: You are signed in as an administrator account.</span>
+        </div>
+      )}
 
       {loading ? (
         <div className="p-12 text-center text-slate-500 text-sm">Loading admin telemetry...</div>
