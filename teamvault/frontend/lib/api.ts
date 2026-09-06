@@ -117,7 +117,7 @@ export const updateProfile = async (updateData: Record<string, any>) => {
   return data;
 };
 
-// Documents & BOLA
+// Documents Service
 export const getMyDocuments = async () => {
   return apiRequest('/api/documents', { method: 'GET' });
 };
@@ -137,7 +137,7 @@ export const getDemoDirectory = async () => {
   return apiRequest('/api/documents/demo-directory', { method: 'GET' });
 };
 
-// Admin & BFLA
+// Admin Operations
 export const getAdminUsers = async () => {
   return apiRequest('/api/admin/users', { method: 'GET' });
 };

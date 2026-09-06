@@ -8,12 +8,9 @@ import {
   FileText,
   Plus,
   ExternalLink,
-  ShieldAlert,
   Copy,
   Check,
-  Calendar,
-  Lock,
-  ArrowRight
+  Calendar
 } from 'lucide-react';
 
 export default function DocumentsPage() {
@@ -85,7 +82,7 @@ export default function DocumentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight">Documents Workspace</h1>
-          <p className="text-xs text-slate-400">Manage internal documents or conduct BOLA authorization tests</p>
+          <p className="text-xs text-slate-400">Manage internal enterprise documents securely</p>
         </div>
 
         <button
@@ -95,85 +92,6 @@ export default function DocumentsPage() {
           <Plus className="w-4 h-4" />
           <span>New Document</span>
         </button>
-      </div>
-
-      {/* BOLA Demonstration Guide Panel */}
-      <div className="bg-red-950/20 border border-red-900/40 rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2 text-red-400 text-sm font-semibold">
-            <ShieldAlert className="w-4 h-4" />
-            <span>OWASP API1:2023 - Broken Object Level Authorization (BOLA) Target Info</span>
-          </div>
-          <span className="text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-mono">
-            Demo Reference
-          </span>
-        </div>
-
-        <p className="text-xs text-slate-300 leading-relaxed">
-          In this vulnerable backend, <code className="text-red-300">GET /api/documents/:id</code> only queries by Document ID and <strong className="text-white">fails to verify ownerId === authenticatedUser.id</strong>. Below are the deterministic IDs for Bob&apos;s confidential documents. If logged in as Alice, click or paste Bob&apos;s ID into the browser address bar to demonstrate the exploit:
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="p-3 bg-slate-950/80 border border-slate-800 rounded-lg flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-xs font-bold text-white flex items-center space-x-1.5">
-                <Lock className="w-3 h-3 text-amber-400" />
-                <span>Bob Financial Summary (Confidential)</span>
-              </div>
-              <div className="text-[11px] text-slate-400 font-mono">ID: 66d200000000000000000001</div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => copyToClipboard('66d200000000000000000001')}
-                title="Copy ID"
-                className="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs"
-              >
-                {copiedId === '66d200000000000000000001' ? (
-                  <Check className="w-3.5 h-3.5 text-green-400" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-              <Link
-                href="/documents/66d200000000000000000001"
-                className="px-2.5 py-1 bg-red-600/30 hover:bg-red-600/50 text-red-300 border border-red-500/30 rounded text-xs font-medium flex items-center space-x-1 transition"
-              >
-                <span>Test Access</span>
-                <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="p-3 bg-slate-950/80 border border-slate-800 rounded-lg flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-xs font-bold text-white flex items-center space-x-1.5">
-                <Lock className="w-3 h-3 text-amber-400" />
-                <span>Bob Architecture Strategy (Internal)</span>
-              </div>
-              <div className="text-[11px] text-slate-400 font-mono">ID: 66d200000000000000000002</div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => copyToClipboard('66d200000000000000000002')}
-                title="Copy ID"
-                className="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs"
-              >
-                {copiedId === '66d200000000000000000002' ? (
-                  <Check className="w-3.5 h-3.5 text-green-400" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-              <Link
-                href="/documents/66d200000000000000000002"
-                className="px-2.5 py-1 bg-red-600/30 hover:bg-red-600/50 text-red-300 border border-red-500/30 rounded text-xs font-medium flex items-center space-x-1 transition"
-              >
-                <span>Test Access</span>
-                <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* User's Documents List */}

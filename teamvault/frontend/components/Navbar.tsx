@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { getUser, clearSession, UserSession } from '../lib/api';
-import { Shield, FileText, LayoutDashboard, UserCheck, LogOut, Terminal, Lock } from 'lucide-react';
+import { Shield, FileText, LayoutDashboard, UserCheck, LogOut, Lock } from 'lucide-react';
 
 export default function Navbar() {
   const [currentUser, setCurrentUser] = useState<UserSession | null>(null);
@@ -37,11 +37,8 @@ export default function Navbar() {
                 <span className="font-bold text-lg tracking-tight text-white group-hover:text-blue-400 transition">
                   TeamVault
                 </span>
-                <span className="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded bg-red-500/20 text-red-400 border border-red-500/30">
-                  Target Lab
-                </span>
               </div>
-              <p className="text-[10px] text-slate-400 -mt-0.5">Vulnerable Target Application</p>
+              <p className="text-[10px] text-slate-400 -mt-0.5">Enterprise Document Workspace</p>
             </div>
           </Link>
         </div>
@@ -99,19 +96,6 @@ export default function Navbar() {
               )}
             </>
           )}
-
-          {/* Security Demo is always accessible */}
-          <Link
-            href="/security-demo"
-            className={`px-3 py-1.5 rounded-md text-sm font-medium transition flex items-center space-x-1.5 ${
-              pathname === '/security-demo'
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                : 'text-amber-400 hover:bg-amber-500/10'
-            }`}
-          >
-            <Terminal className="w-4 h-4" />
-            <span>Security Demo</span>
-          </Link>
         </nav>
 
         {/* User Status / Login */}

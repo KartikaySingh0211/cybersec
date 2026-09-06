@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getProfile, getUser, UserSession } from '../../lib/api';
-import { UserCheck, Shield, Mail, Calendar, Edit3, Terminal, AlertCircle } from 'lucide-react';
+import { UserCheck, Shield, Mail, Calendar, Edit3 } from 'lucide-react';
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function ProfilePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white tracking-tight">User Profile</h1>
-          <p className="text-xs text-slate-400">Manage account information & inspect permission attributes</p>
+          <p className="text-xs text-slate-400">Manage account information and profile settings</p>
         </div>
 
         <Link
@@ -97,14 +97,14 @@ export default function ProfilePage() {
 
         <div className="p-4 flex items-center justify-between">
           <span className="text-xs text-slate-400 flex items-center space-x-2">
-            <AlertCircle className="w-4 h-4 text-amber-400" />
-            <span>isAdmin Flag (Protected)</span>
+            <Shield className="w-4 h-4 text-blue-400" />
+            <span>Administrator Privileges</span>
           </span>
           <span className="text-sm font-mono text-slate-300">
             {profile.isAdmin ? (
-              <span className="text-green-400 font-bold">true</span>
+              <span className="text-emerald-400 font-bold">Enabled</span>
             ) : (
-              <span className="text-slate-500">false</span>
+              <span className="text-slate-500">Disabled</span>
             )}
           </span>
         </div>
@@ -123,21 +123,6 @@ export default function ProfilePage() {
           <span className="text-xs text-slate-400">User ObjectId</span>
           <span className="text-xs font-mono text-slate-500">{profile._id}</span>
         </div>
-      </div>
-
-      {/* BOPLA vulnerability educational note */}
-      <div className="p-5 rounded-xl bg-purple-950/20 border border-purple-900/30 space-y-2">
-        <div className="flex items-center space-x-2 text-purple-300 text-xs font-semibold">
-          <Terminal className="w-4 h-4" />
-          <span>Notice: BOPLA (API3) Privilege Escalation Vulnerability</span>
-        </div>
-        <p className="text-xs text-slate-400 leading-relaxed">
-          The backend endpoint <code className="text-slate-300">PATCH /api/users/profile</code> does not filter protected properties like <code className="text-purple-300">role</code> and <code className="text-purple-300">isAdmin</code>. You can perform mass assignment via the interactive form on the{' '}
-          <Link href="/security-demo" className="text-purple-300 underline hover:text-purple-200">
-            Security Demo Page
-          </Link>{' '}
-          to escalate your role from USER to ADMIN!
-        </p>
       </div>
     </div>
   );
