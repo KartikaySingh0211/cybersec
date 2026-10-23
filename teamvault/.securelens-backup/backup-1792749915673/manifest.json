@@ -1,0 +1,14 @@
+{
+  "id": "backup-1792749915673",
+  "timestamp": "2026-10-23T10:05:15.676Z",
+  "files": [
+    {
+      "relativePath": "backend\\src\\middleware\\auth.middleware.ts",
+      "backupPath": "D:\\Dev\\semester\\cybersec\\teamvault\\.securelens-backup\\backup-1792749915673\\backend\\src\\middleware\\auth.middleware.ts"
+    },
+    {
+      "relativePath": "backend\\src\\routes\\admin.routes.ts",
+      "backupPath": "D:\\Dev\\semester\\cybersec\\teamvault\\.securelens-backup\\backup-1792749915673\\backend\\src\\routes\\admin.routes.ts"
+    }
+  ]
+}

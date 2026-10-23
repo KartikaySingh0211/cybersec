@@ -25,7 +25,8 @@ export class DocumentController {
       const documentId = req.params.id;
 
       // VULNERABILITY: No check verifying that authenticated user owns this document!
-      const document = await DocumentService.getDocumentByIdVulnerable(documentId);
+      const userId = req.user?.id;
+      const document = await DocumentService.getDocumentByIdVulnerable(documentId, userId);
 
       if (!document) {
         res.status(404).json({ message: 'Document not found' });

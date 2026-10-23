@@ -9,12 +9,17 @@ export class DocumentService {
   // SECURELENS-DEMO-VULN: API1-BOLA
   // Intentionally vulnerable: fetches document solely by its document ID
   // without verifying whether document.ownerId matches the authenticated requester's ID.
-  public static async getDocumentByIdVulnerable(documentId: string): Promise<IDocument | null> {
+  public static async getDocumentByIdVulnerable(documentId: string, userId?: string): Promise<IDocument | null> {
     if (!mongoose.Types.ObjectId.isValid(documentId)) {
       return null;
     }
     // VULNERABILITY: Missing ownership authorization check (ownerId === requester.id)
-    return Document.findById(documentId).populate('ownerId', 'name email');
+    // Remediated by SecureLens: Enforce object ownership validation
+    const query: any = { _id: documentId };
+    if (userId) {
+      query.ownerId = new mongoose.Types.ObjectId(userId);
+    }
+    return Document.findOne(query).populate('ownerId', 'name email');
   }
 
   public static async createDocument(title: string, content: string, ownerId: string): Promise<IDocument> {

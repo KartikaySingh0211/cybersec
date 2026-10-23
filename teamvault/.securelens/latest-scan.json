@@ -1,0 +1,43 @@
+{
+  "scanId": "scan-1792749928212",
+  "repository": {
+    "name": "teamvault",
+    "path": "D:\\Dev\\semester\\cybersec\\teamvault",
+    "primaryLanguage": "TypeScript",
+    "framework": "Express",
+    "filesCount": 21
+  },
+  "timestamp": "2026-10-23T10:05:28.212Z",
+  "findings": [
+    {
+      "id": "SL-001",
+      "ruleId": "API2-BROKEN-AUTH",
+      "owaspId": "API2",
+      "title": "Potential Broken Authentication",
+      "description": "Handler \"impersonate\" creates an authenticated session from client-controlled identity \"req.query.userId\" without verifying user credentials.",
+      "severity": "CRITICAL",
+      "confidence": "HIGH",
+      "filePath": "backend\\src\\controllers\\demo-auth.controller.ts",
+      "lineNumber": 8,
+      "codeSnippet": "public static async impersonate(req: Request, res: Response): Promise<void> {\r\n    try {\r\n      const userId = req.query.userId as string;\r\n\r\n      if (!userId) {\r\n        res.status(400).json({\r\n          message: 'Demo Authentication Vulnerability: Missing userId query parameter',\r\n        });\r\n  ",
+      "evidence": [
+        "1. Client-controlled identity input detected: \"req.query.userId\".",
+        "2. User object lookup executed: \"findUserById\".",
+        "3. Authenticated session or token generated: \"generateToken\".",
+        "4. Credential verification (e.g. bcrypt.compare or password validation) was NOT found in this execution path.",
+        "5. Route allows arbitrary callers to impersonate identities by supplying a user identifier."
+      ],
+      "recommendation": "Disable or remove this insecure demo impersonation endpoint, or require proper multi-factor credential validation before issuing authentication tokens.",
+      "patchAvailable": true,
+      "patchType": "TARGET_SPECIFIC",
+      "status": "PATCH_APPLIED"
+    }
+  ],
+  "summary": {
+    "critical": 1,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "total": 1
+  }
+}

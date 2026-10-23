@@ -1,0 +1,10 @@
+{
+  "id": "backup-1792749895809",
+  "timestamp": "2026-10-23T10:04:55.811Z",
+  "files": [
+    {
+      "relativePath": "backend\\src\\controllers\\user.controller.ts",
+      "backupPath": "D:\\Dev\\semester\\cybersec\\teamvault\\.securelens-backup\\backup-1792749895809\\backend\\src\\controllers\\user.controller.ts"
+    }
+  ]
+}

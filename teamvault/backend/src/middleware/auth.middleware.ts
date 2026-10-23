@@ -36,3 +36,13 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
     return;
   }
 };
+
+
+// Remediated by SecureLens: Role authorization guard
+export const requireAdmin = (req: Request, res: Response, next: NextFunction): void => {
+  if (!req.user || req.user.role !== 'ADMIN') {
+    res.status(403).json({ message: 'Forbidden: Administrator privileges required.' });
+    return;
+  }
+  next();
+};

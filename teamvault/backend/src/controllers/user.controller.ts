@@ -34,7 +34,12 @@ export class UserController {
       }
 
       // VULNERABILITY: req.body is not filtered or allowlisted
-      const updatedUser = await UserService.updateProfileVulnerable(userId, req.body);
+      // Remediated by SecureLens: Allowlist safe properties to prevent BOPLA privilege escalation
+      const safeUpdate: Record<string, any> = {};
+      if (req.body.name !== undefined) safeUpdate.name = req.body.name;
+      if (req.body.email !== undefined) safeUpdate.email = req.body.email;
+
+      const updatedUser = await UserService.updateProfileVulnerable(userId, safeUpdate);
       if (!updatedUser) {
         res.status(404).json({ message: 'User not found' });
         return;
